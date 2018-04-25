@@ -49,7 +49,8 @@ public class GameActivity extends AppCompatActivity {
         cpuChoices.add(new Rock());
         cpuChoices.add(new Scissors());
         cpuChoices.add(new Paper());
-        this.game = new Game(new Player(), new CPU(), cpuChoices);
+        if (game == null){
+        this.game = new Game(new Player(), new CPU(), cpuChoices);}
         refresh();
     }
 
@@ -75,20 +76,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void passToResult(){
-        String result = gameResult.getText().toString();
-        String name = playerName.getText().toString();
-        String robot = cpuName.getText().toString();
-        refresh();
-        String playerScore = playerWinCount.getText().toString();
-        String robotScore = cpuWinCount.getText().toString();
-
-
         Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("result", result);
-        intent.putExtra("name", name);
-        intent.putExtra("robot", robot);
-        intent.putExtra("playerScore", playerScore);
-        intent.putExtra("robotScore", robotScore);
+        intent.putExtra("result", gameResult.getText());
+        intent.putExtra("name", game.getHuman().getName());
+        intent.putExtra("robot", game.getCpu().getName());
+        intent.putExtra("playerScore", game.getHuman().getWinCount());
+        intent.putExtra("robotScore", game.getCpu().getWinCount());
         startActivity(intent);
     }
 
@@ -97,6 +90,7 @@ public class GameActivity extends AppCompatActivity {
         game.getHuman().setHand(new Scissors());
         game.cpuChoice();
         gameResult.setText(game.getResult());
+        refresh();
         passToResult();
     }
 
@@ -104,6 +98,7 @@ public class GameActivity extends AppCompatActivity {
         game.getHuman().setHand(new Rock());
         game.cpuChoice();
         gameResult.setText(game.getResult());
+        refresh();
         passToResult();
     }
 
@@ -111,6 +106,7 @@ public class GameActivity extends AppCompatActivity {
         game.getHuman().setHand(new Paper());
         game.cpuChoice();
         gameResult.setText(game.getResult());
+        refresh();
         passToResult();
     }
 
