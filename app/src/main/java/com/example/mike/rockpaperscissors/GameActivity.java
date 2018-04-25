@@ -1,5 +1,6 @@
 package com.example.mike.rockpaperscissors;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -73,25 +74,44 @@ public class GameActivity extends AppCompatActivity {
         game.cpuChoice();
     }
 
+    public void passToResult(){
+        String result = gameResult.getText().toString();
+        String name = playerName.getText().toString();
+        String robot = cpuName.getText().toString();
+        refresh();
+        String playerScore = playerWinCount.getText().toString();
+        String robotScore = cpuWinCount.getText().toString();
+
+
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("result", result);
+        intent.putExtra("name", name);
+        intent.putExtra("robot", robot);
+        intent.putExtra("playerScore", playerScore);
+        intent.putExtra("robotScore", robotScore);
+        startActivity(intent);
+    }
+
+
     public void onClickScissorsButton(View button){
         game.getHuman().setHand(new Scissors());
         game.cpuChoice();
         gameResult.setText(game.getResult());
-        refresh();
+        passToResult();
     }
 
     public void onClickRockButton(View button){
         game.getHuman().setHand(new Rock());
         game.cpuChoice();
         gameResult.setText(game.getResult());
-        refresh();
+        passToResult();
     }
 
     public void onClickPaperButton(View button){
         game.getHuman().setHand(new Paper());
         game.cpuChoice();
         gameResult.setText(game.getResult());
-        refresh();
+        passToResult();
     }
 
 

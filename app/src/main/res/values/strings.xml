@@ -10,4 +10,6 @@
     <string name="scissorsIcon">Scissors Icon</string>
     <string name="rockIcon">Rock Icon</string>
     <string name="paperIcon">Paper Icon</string>
+    <string name="result_activity">Result Activity</string>
+
 </resources>
